@@ -1,3 +1,4 @@
+package org.school.taskmanager;
 
 public class TestClass {
 
