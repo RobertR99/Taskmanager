@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 /**
+ * Establishes a Connection to the Database defined in the application.properties-file
  * 
  * @author JA - 15.93.2017
  * @version 1.0

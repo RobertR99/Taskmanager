@@ -6,6 +6,13 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * Loads the Properties in the application.properties-file
+ * 
+ * @author JA - 15.03.2017
+ * @version 1.0
+ *
+ */
 public class PropertiesLoader {
 	
 	private static final String PROPERTIES_FILENAME = ".//files//application.properties";
@@ -38,6 +45,9 @@ public class PropertiesLoader {
 
 	// ----- PRINTER ----- //
 
+	/**
+	 * Prints the read Properties
+	 */
 	public void printProperties() {
 
 		for (Map.Entry<Object, Object> entry : prop.entrySet()) {

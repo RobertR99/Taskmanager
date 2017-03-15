@@ -5,6 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 
+ * @author JA - 15.03.2017
+ * @version 1.0
+ *
+ */
 public class DBTransactions {
 
 	private static final String DB_GET_ALL = "SELECT * FROM USER";
