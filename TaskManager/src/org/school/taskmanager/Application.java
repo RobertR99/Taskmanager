@@ -1,5 +1,7 @@
 package org.school.taskmanager;
 
+import org.school.taskmanager.db.DBTransactions;
+
 /**
  * 
  * @author JA - 15.02.2017
@@ -7,5 +9,15 @@ package org.school.taskmanager;
  *
  */
 public class Application {
+	
+	public Application(){
+		
+		new DBTransactions();
+		
+	}
+	
+	public static void main(String[] args) {
+		new Application();
+	}
 
 }
