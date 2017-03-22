@@ -4,36 +4,87 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class CreateGUI extends JPanel implements ActionListener {
-	private JButton cancel, save, delete; 
-	private JTextField title, phase, creationDate, dueDate;
+	private JButton cancel; 
+	private JTextField dueDate;
+	private JButton btnSave;
+	private JButton btnDelte;
+	private JLabel lblTitle;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 	
 	public CreateGUI(){
 		//Buttons
 		cancel = new JButton("Cancel");
-		save = new JButton("Save");
-		save.setBounds(1511, 893, 57, 23);
-		delete = new JButton("Delete");
-		delete.setBounds(1542, 37, 63, 23);
-		//Textfields
-		title = new JTextField();
-		title.setBounds(305, 6, 6, 20);
-		phase = new JTextField();
-		phase.setBounds(316, 6, 6, 20);
-		creationDate = new JTextField();
-		creationDate.setBounds(327, 6, 6, 20);
 		dueDate = new JTextField();
-		dueDate.setBounds(338, 6, 6, 20);
+		dueDate.setBounds(280, 46, 400, 55);
 		setLayout(null);
 		//Add the Elements
 		this.add(cancel);
-		this.add(save);
-		this.add(delete);
-		this.add(title);
-		this.add(phase);
-		this.add(creationDate);
 		this.add(dueDate);
 		//And set their size & area
-		cancel.setBounds(1348, 874, 106, 38);
+		cancel.setBounds(1348, 838, 106, 38);
+		
+		btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSave.setBounds(1484, 838, 106, 38);
+		add(btnSave);
+		
+		btnDelte = new JButton("Delete");
+		btnDelte.setBounds(1484, 36, 106, 38);
+		add(btnDelte);
+		
+		lblTitle = new JLabel("Title:");
+		lblTitle.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblTitle.setBounds(34, 55, 87, 29);
+		add(lblTitle);
+		
+		JLabel lblPhase = new JLabel("Phase:");
+		lblPhase.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblPhase.setBounds(34, 233, 87, 29);
+		add(lblPhase);
+		
+		textField = new JTextField();
+		textField.setBounds(280, 224, 400, 55);
+		add(textField);
+		
+		JLabel lblDateOfCreation = new JLabel("Date of creation:");
+		lblDateOfCreation.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblDateOfCreation.setBounds(34, 446, 197, 29);
+		add(lblDateOfCreation);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(280, 437, 400, 55);
+		add(textField_1);
+		
+		JLabel lblDueDate = new JLabel("Due date:");
+		lblDueDate.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblDueDate.setBounds(34, 641, 120, 29);
+		add(lblDueDate);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(280, 632, 400, 55);
+		add(textField_2);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setToolTipText("Tasks");
+		menuBar.setBounds(0, 0, 1615, 21);
+		add(menuBar);
+		
+		JMenu mnTask = new JMenu("Tasks");
+		menuBar.add(mnTask);
+		
+		JMenuItem menuItem = new JMenuItem("Create Task");
+		mnTask.add(menuItem);
+		
+		JMenu menu = new JMenu("Help");
+		menuBar.add(menu);
+		
+		JMenuItem menuItem_1 = new JMenuItem("Help");
+		menu.add(menuItem_1);
 		//Settings for Window
 		this.setVisible(true);
 		//this.setUndecorated(true); 								// what does this do?
