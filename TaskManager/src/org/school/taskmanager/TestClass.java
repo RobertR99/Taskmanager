@@ -3,7 +3,10 @@ package org.school.taskmanager;
 public class TestClass {
 
 	public static void main(String[] args) {
-		CreateGUI g = new CreateGUI();
-		g.createAndShowGUI();
+//		CreateGUI g = new CreateGUI();
+//		g.createAndShowGUI();
+//		
+		MainGUI gui = new MainGUI();
+		gui.createAndShowGUI();
 	}
 }
