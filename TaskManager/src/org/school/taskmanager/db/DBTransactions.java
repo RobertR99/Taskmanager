@@ -15,8 +15,8 @@ public class DBTransactions {
 
 	private static final String DB_GET_ALL = "SELECT * FROM USER";
 	private static final String DB_GET_TABLES = "SHOW TABLES";
-	private static final String DB_CREATE_USER_TABLE = "CREATE TABLE USER (ID INT NOT NULL, NAME VARCHAR(25))";
-	private static final String DB_INSERT_USER = "INSERT INTO USER VALUES(1, 'Jakob')";
+	//private static final String DB_CREATE_USER_TABLE = "CREATE TABLE USER (ID INT NOT NULL, NAME VARCHAR(25))";
+	//private static final String DB_INSERT_USER = "INSERT INTO USER VALUES(1, 'Jakob')";
 
 	private Connection conn = null;
 	private DBConnector dbc = new DBConnector();
@@ -71,10 +71,10 @@ public class DBTransactions {
 		ps.close();		
 	}
 	
-	private void dbQuery(String sql) throws SQLException{
+	/*private void dbQuery(String sql) throws SQLException{
 		
 		PreparedStatement ps = conn.prepareCall(sql);
 		ps.execute();
 		ps.close();		
-	}
+	}*/
 }
