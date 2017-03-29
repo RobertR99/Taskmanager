@@ -8,5 +8,8 @@ public class TestClass {
 //		
 		MainGUI gui = new MainGUI();
 		gui.createAndShowGUI();
+//		
+//		helpGUI hg = new helpGUI();
+//		hg.createAndShowGUI();
 	}
 }
