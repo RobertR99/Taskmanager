@@ -1,6 +1,6 @@
 package org.school.taskmanager;
 
-import org.school.taskmanager.db.DBTransactions;
+import org.school.taskmanager.db.DBTaskImpl;
 
 /**
  * 
@@ -12,7 +12,7 @@ public class Application {
 	
 	public Application(){
 		
-		new DBTransactions();
+		new DBTaskImpl();
 		
 	}
 	
