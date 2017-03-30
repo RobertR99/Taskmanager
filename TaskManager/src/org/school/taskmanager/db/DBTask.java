@@ -25,7 +25,7 @@ public interface DBTask {
 	 * 
 	 * @param task Task.Objected to be edited
 	 */
-	public void dbChangeTaskPhase(Task task) throws SQLException;
+	public void dbChangeTaskPhase(Task task, String phase) throws SQLException;
 	
 	/**
 	 * Returns a List of all Tasks in the DB

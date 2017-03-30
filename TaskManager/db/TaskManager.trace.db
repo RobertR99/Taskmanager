@@ -1,0 +1,24 @@
+03-29 11:15:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "PUBLIC"
+Data conversion error converting "PUBLIC" [22018-176]
+03-30 13:13:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Kann "DATE" "30.03.2017" nicht umwandeln
+Cannot parse "DATE" constant "30.03.2017"; SQL statement:
+INSERT INTO TASK (TITLE, PHASE, CREATION_DATE, DUE_DATE) VALUES(?,?,?,?) -- (?1, ?2, ?3, ?4) [22007-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueDate.parse(ValueDate.java:71)
+	at org.h2.value.Value.convertTo(Value.java:860)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:199)
+	at org.school.taskmanager.db.DBTaskImpl.dbCreateTask(DBTaskImpl.java:53)
+	at org.school.taskmanager.Main.<init>(Main.java:16)
+	at org.school.taskmanager.Main.main(Main.java:24)
+Caused by: java.lang.IllegalArgumentException: 30.03.2017
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
+	at org.h2.value.ValueDate.parse(ValueDate.java:69)
+	... 10 more

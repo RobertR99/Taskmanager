@@ -19,12 +19,8 @@ import org.school.taskmanager.dto.Task;
 public class DBTaskImpl implements DBTask {
 
 	private static final String DB_CREATE_TASK = "INSERT INTO TASK (TITLE, PHASE, CREATION_DATE, DUE_DATE) VALUES(?,?,?,?)";
-	private static final String DB_CHANGE_TASK = "";
+	private static final String DB_CHANGE_TASK_PHASE = "ALTER TABLE TASK SET PHASE=? WHERE ID=?";
 	private static final String DB_GET_TASKS = "SELECT * FROM TASK";
-	// private static final String DB_CREATE_USER_TABLE = "CREATE TABLE USER (ID
-	// INT NOT NULL, NAME VARCHAR(25))";
-	// private static final String DB_INSERT_USER = "INSERT INTO USER VALUES(1,
-	// 'Jakob')";
 
 	private Connection conn = null;
 	private DBConnector dbc = new DBConnector();
@@ -34,40 +30,32 @@ public class DBTaskImpl implements DBTask {
 		if (conn == null) {
 			conn = dbc.getConn();
 		}
-
-		try {
-			PreparedStatement ps = conn.prepareStatement("SHOW TABLES");
-			ResultSet rs = ps.executeQuery();
-			int col1Pos = rs.findColumn("TABLE_NAME");
-			int col2Pos = rs.findColumn("TABLE_SCHEMA");
-			while (rs.next()){
-				System.out.println(rs.getString(col1Pos));
-				System.out.print(rs.getShort(col2Pos));
-			}
-			
-			//dbGetTasks();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	@Override
 	public void dbCreateTask(Task task) throws SQLException {
-		// TODO Auto-generated method stub
 
+		PreparedStatement ps = conn.prepareStatement(DB_CREATE_TASK);
+		ps.setString(1, task.getTitle());
+		ps.setString(2, task.getPhase());
+		ps.setString(3, task.getCreationDate());
+		ps.setString(4, task.getDueDate());
+		ps.execute();
+		ps.close();
 	}
 
 	@Override
-	public void dbChangeTaskPhase(Task task) throws SQLException {
-		// TODO Auto-generated method stub
+	public void dbChangeTaskPhase(Task task, String phase) throws SQLException {
 
+		PreparedStatement ps = conn.prepareStatement(DB_CHANGE_TASK_PHASE);
+		ps.setString(1, phase);
+		ps.setInt(2, task.getId());
+		ps.execute();
+		ps.close();
 	}
 
 	@Override
 	public List<Task> dbGetTasks() throws SQLException {
-		// TODO Auto-generated method stub
-
 		List<Task> tasks = new ArrayList<Task>();
 
 		PreparedStatement ps = conn.prepareStatement(DB_GET_TASKS);
@@ -82,13 +70,13 @@ public class DBTaskImpl implements DBTask {
 			int id = rs.getInt(col1Pos);
 			String title = rs.getString(col2Pos);
 			String phase = rs.getString(col3Pos);
-			Date creationDate = rs.getDate(col4Pos);
-			Date dueDate = rs.getDate(col5Pos);
+			String creationDate = rs.getString(col4Pos);
+			String dueDate = rs.getString(col5Pos);
 			Task task = new Task(id, title, phase, creationDate, dueDate);
 			task.print();
 			tasks.add(task);
 		}
-		
+
 		ps.close();
 		return tasks;
 	}

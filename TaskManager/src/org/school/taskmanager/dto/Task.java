@@ -13,10 +13,10 @@ public class Task extends DBElement {
 	private int id;
 	private String title;
 	private String phase;
-	private Date creationDate;
-	private Date dueDate;
+	private String creationDate;
+	private String dueDate;
 
-	public Task(int id, String title, String phase, Date creationDate, Date dueDate){
+	public Task(int id, String title, String phase, String creationDate, String dueDate){
 		
 		setId(id);
 		setTitle(title);
@@ -63,19 +63,19 @@ public class Task extends DBElement {
 		this.phase = phase;
 	}
 
-	public Date getCreationDate() {
+	public String getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
 
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 

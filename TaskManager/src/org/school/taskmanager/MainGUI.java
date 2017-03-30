@@ -1,14 +1,24 @@
 package org.school.taskmanager;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+import org.school.taskmanager.dto.Phase;
+import org.school.taskmanager.dto.Task;
 
 public class MainGUI extends JPanel implements ActionListener {
 	private final Action cga = new createGUIAction();
@@ -18,6 +28,12 @@ public class MainGUI extends JPanel implements ActionListener {
 	private final Action gha = new goHomeAction();
 	private final Action da = new deleteAction();
 	private final Action ca = new cancelAction();
+	
+	private TaskLogic tl;
+
+	// Tasks stored in the DB
+	private List<Task> tasks = new ArrayList<Task>();
+	private List<Phase> phases = new ArrayList<Phase>();
 
 	public MainGUI() {
 		setLayout(null);
@@ -58,17 +74,14 @@ public class MainGUI extends JPanel implements ActionListener {
 
 		JLabel lblTestprojecttestprojecttestprojecttestprojecttestproject = new JLabel(
 				"TESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECT");
-		lblTestprojecttestprojecttestprojecttestprojecttestproject.setBounds(
-				169, 158, 264, 19);
+		lblTestprojecttestprojecttestprojecttestprojecttestproject.setBounds(169, 158, 264, 19);
 		add(lblTestprojecttestprojecttestprojecttestprojecttestproject);
 
-		JLabel label = new JLabel(
-				"TESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECT");
+		JLabel label = new JLabel("TESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECT");
 		label.setBounds(738, 158, 264, 19);
 		add(label);
 
-		JLabel label_1 = new JLabel(
-				"TESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECT");
+		JLabel label_1 = new JLabel("TESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECTTESTPROJECT");
 		label_1.setBounds(1319, 158, 264, 19);
 		add(label_1);
 
@@ -123,11 +136,11 @@ public class MainGUI extends JPanel implements ActionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-	//		if (e.getActionCommand().equals("create")) {
-				// open create Task window.
-				CreateGUI cg = new CreateGUI();
-				cg.createAndShowGUI();
-		//	}
+			// if (e.getActionCommand().equals("create")) {
+			// open create Task window.
+			CreateGUI cg = new CreateGUI();
+			cg.createAndShowGUI();
+			// }
 		}
 	}
 
@@ -138,44 +151,42 @@ public class MainGUI extends JPanel implements ActionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-		//	if (e.getActionCommand().equals("help")) {
-				// open the Help Window
-				helpGUI hg = new helpGUI();
-				hg.createAndShowGUI();
-		//	}
+			// if (e.getActionCommand().equals("help")) {
+			// open the Help Window
+			helpGUI hg = new helpGUI();
+			hg.createAndShowGUI();
+			// }
 		}
 	}
 
 	private class editAction extends AbstractAction {
 		public editAction() {
 			putValue(NAME, "Edit");
-			putValue(SHORT_DESCRIPTION,
-					"Opens the create new Task GUI and gets Values from DB.");
+			putValue(SHORT_DESCRIPTION, "Opens the create new Task GUI and gets Values from DB.");
 		}
 
 		public void actionPerformed(ActionEvent e) {
-		//	if (e.getActionCommand().equals("edit")) {
-				CreateGUI cg = new CreateGUI();
-				cg.createAndShowGUI();
-				// get values out of DB and put them in the textfield
-		//	}
+			// if (e.getActionCommand().equals("edit")) {
+			CreateGUI cg = new CreateGUI();
+			cg.createAndShowGUI();
+			// get values out of DB and put them in the textfield
+			// }
 		}
 	}
 
 	private class cancelAction extends AbstractAction {
 		public cancelAction() {
 			putValue(NAME, "Cancel");
-			putValue(SHORT_DESCRIPTION,
-					"Cancels the current action and goes to Home.");
+			putValue(SHORT_DESCRIPTION, "Cancels the current action and goes to Home.");
 		}
 
 		public void actionPerformed(ActionEvent e) {
-	//		if (e.getActionCommand().equals("Cancel")) {
-				// maybe do some logic to cancel
-				MainGUI mg = new MainGUI();
-				mg.createAndShowGUI();
-				//frame.dispose();
-		//	}
+			// if (e.getActionCommand().equals("Cancel")) {
+			// maybe do some logic to cancel
+			MainGUI mg = new MainGUI();
+			mg.createAndShowGUI();
+			// frame.dispose();
+			// }
 		}
 	}
 
@@ -186,19 +197,19 @@ public class MainGUI extends JPanel implements ActionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-		//	if (e.getActionCommand().equals("Save")) {
-				// if(Entries.contains(Task.getTitle()))
-				// {
-				// update entries(title, phase, creationDate, dueDate);
-				// }
-				// else{
-				// insert task into entries;
-				// }
-				//
-				// save into db
-				MainGUI mg = new MainGUI();
-				mg.createAndShowGUI();
-	//		}
+			// if (e.getActionCommand().equals("Save")) {
+			// if(Entries.contains(Task.getTitle()))
+			// {
+			// update entries(title, phase, creationDate, dueDate);
+			// }
+			// else{
+			// insert task into entries;
+			// }
+			//
+			// save into db
+			MainGUI mg = new MainGUI();
+			mg.createAndShowGUI();
+			// }
 		}
 	}
 
@@ -209,11 +220,11 @@ public class MainGUI extends JPanel implements ActionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-		//	if (e.getActionCommand().equals("Home")) {
-				// discard changes?
-				MainGUI mg = new MainGUI();
-				mg.createAndShowGUI();
-	//		}
+			// if (e.getActionCommand().equals("Home")) {
+			// discard changes?
+			MainGUI mg = new MainGUI();
+			mg.createAndShowGUI();
+			// }
 		}
 	}
 
@@ -224,12 +235,12 @@ public class MainGUI extends JPanel implements ActionListener {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-	//		if (e.getActionCommand().equals("Delete")) {
-				// delete entry from DB. delete task from tasks where title =
-				// task.getTitle();
-				MainGUI mg = new MainGUI();
-				mg.createAndShowGUI();
-	//		}
+			// if (e.getActionCommand().equals("Delete")) {
+			// delete entry from DB. delete task from tasks where title =
+			// task.getTitle();
+			MainGUI mg = new MainGUI();
+			mg.createAndShowGUI();
+			// }
 		}
 	}
 
@@ -237,6 +248,24 @@ public class MainGUI extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	// ----- GETTER / SETTER - METHODS ----- //
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public List<Phase> getPhases() {
+		return phases;
+	}
+
+	public void setPhases(List<Phase> phases) {
+		this.phases = phases;
 	}
 
 }
