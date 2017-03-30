@@ -1,40 +1,29 @@
-package org.school.taskmanager;
+package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import org.school.taskmanager.dto.Phase;
-import org.school.taskmanager.dto.Task;
-
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.Font;
+/**Creates the Main GUI window
+ * 
+ * @author Robert Randles - 29.03.2017
+ * @version 1.0
+ */
 public class MainGUI extends JPanel implements ActionListener {
 	private final Action cga = new createGUIAction();
 	private final Action ha = new helpAction();
 	private final Action ea = new editAction();
-	private final Action sa = new saveAction();
 	private final Action gha = new goHomeAction();
-	private final Action da = new deleteAction();
-	private final Action ca = new cancelAction();
-	
-	private TaskLogic tl;
 
-	// Tasks stored in the DB
-	private List<Task> tasks = new ArrayList<Task>();
-	private List<Phase> phases = new ArrayList<Phase>();
-
+	private JFrame frame;
+/**
+ * Constructor of MainGUI. Adds all of the Elements and sets their properties
+ */
 	public MainGUI() {
 		setLayout(null);
 		setVisible(true);
@@ -57,19 +46,19 @@ public class MainGUI extends JPanel implements ActionListener {
 		JButton btnEdit1 = new JButton("edit");
 		ea.putValue(Action.ACTION_COMMAND_KEY, "edit");
 		btnEdit1.setAction(ea);
-		btnEdit1.setBounds(382, 154, 51, 23);
+		btnEdit1.setBounds(382, 154, 70, 23);
 		add(btnEdit1);
 
 		JButton btnEdit2 = new JButton("edit");
 		ea.putValue(Action.ACTION_COMMAND_KEY, "edit");
 		btnEdit2.setAction(ea);
-		btnEdit2.setBounds(983, 154, 51, 23);
+		btnEdit2.setBounds(983, 154, 70, 23);
 		add(btnEdit2);
 
 		JButton btnEdit3 = new JButton("edit");
 		ea.putValue(Action.ACTION_COMMAND_KEY, "edit");
 		btnEdit3.setAction(ea);
-		btnEdit3.setBounds(1544, 154, 51, 23);
+		btnEdit3.setBounds(1544, 154, 70, 23);
 		add(btnEdit3);
 
 		JLabel lblTestprojecttestprojecttestprojecttestprojecttestproject = new JLabel(
@@ -110,15 +99,17 @@ public class MainGUI extends JPanel implements ActionListener {
 		menuBar.add(mnHome);
 
 		JMenuItem mHome = new JMenuItem("Home");
-
-		mnHome.add(mHome);
+		// JMenuItem mRefresh = new JMenuItem("Refresh");
+		// mnHome.add(mRefresh);
 
 	}
-
+/**
+ * does general settings for the GUI and makes it's elements visible
+ */
 	public void createAndShowGUI() {
 		// Create and set up the window.
-		JFrame frame = new JFrame("Taskmanager - Home");
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		this.frame = new JFrame("Taskmanager - Home");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		// Add content to the window.
@@ -128,119 +119,79 @@ public class MainGUI extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 	}
-
+/**
+ * Defines the settings for the Action that opens the createGUI
+ * @author Robert Randles
+ *
+ */
 	private class createGUIAction extends AbstractAction {
 		public createGUIAction() {
 			putValue(NAME, "create Task");
 			putValue(SHORT_DESCRIPTION, "It handles all actions of the class.");
 		}
-
+/**
+ * Makes a new Object of CreateGUI and displays it.
+ */
 		public void actionPerformed(ActionEvent e) {
-			// if (e.getActionCommand().equals("create")) {
 			// open create Task window.
 			CreateGUI cg = new CreateGUI();
 			cg.createAndShowGUI();
-			// }
 		}
 	}
-
+	/**
+	 * Defines the settings for the Action that opens the helpGUI
+	 * @author Robert Randles
+	 *
+	 */
 	private class helpAction extends AbstractAction {
 		public helpAction() {
 			putValue(NAME, "Help");
 			putValue(SHORT_DESCRIPTION, "Opens the Help GUI.");
 		}
-
+/**
+ * creates a new Object of the helpGUI and displays it
+ */
 		public void actionPerformed(ActionEvent e) {
-			// if (e.getActionCommand().equals("help")) {
 			// open the Help Window
 			helpGUI hg = new helpGUI();
 			hg.createAndShowGUI();
-			// }
 		}
 	}
-
+	/**
+	 * Defines the settings for the Action that opens the createGUI with the Data from DB loaded into it
+	 * @author Robert Randles
+	 *
+	 */
 	private class editAction extends AbstractAction {
 		public editAction() {
 			putValue(NAME, "Edit");
 			putValue(SHORT_DESCRIPTION, "Opens the create new Task GUI and gets Values from DB.");
 		}
-
+/**
+ * creates a new Object of the CreateGUI, loads the Data from DB and displays it
+ */
 		public void actionPerformed(ActionEvent e) {
-			// if (e.getActionCommand().equals("edit")) {
 			CreateGUI cg = new CreateGUI();
 			cg.createAndShowGUI();
 			// get values out of DB and put them in the textfield
-			// }
 		}
 	}
-
-	private class cancelAction extends AbstractAction {
-		public cancelAction() {
-			putValue(NAME, "Cancel");
-			putValue(SHORT_DESCRIPTION, "Cancels the current action and goes to Home.");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			// if (e.getActionCommand().equals("Cancel")) {
-			// maybe do some logic to cancel
-			MainGUI mg = new MainGUI();
-			mg.createAndShowGUI();
-			// frame.dispose();
-			// }
-		}
-	}
-
-	private class saveAction extends AbstractAction {
-		public saveAction() {
-			putValue(NAME, "Save");
-			putValue(SHORT_DESCRIPTION, "Saves changes / new entry to DB.");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			// if (e.getActionCommand().equals("Save")) {
-			// if(Entries.contains(Task.getTitle()))
-			// {
-			// update entries(title, phase, creationDate, dueDate);
-			// }
-			// else{
-			// insert task into entries;
-			// }
-			//
-			// save into db
-			MainGUI mg = new MainGUI();
-			mg.createAndShowGUI();
-			// }
-		}
-	}
-
+	/**
+	 * Defines the settings for the Action that refreshes the MainGUI
+	 * @author Robert Randles
+	 *
+	 */
 	private class goHomeAction extends AbstractAction {
 		public goHomeAction() {
 			putValue(NAME, "Home");
 			putValue(SHORT_DESCRIPTION, "Goes to Home.");
 		}
-
+/**
+ * Refreshes the MainGUI
+ */
 		public void actionPerformed(ActionEvent e) {
-			// if (e.getActionCommand().equals("Home")) {
 			// discard changes?
-			MainGUI mg = new MainGUI();
-			mg.createAndShowGUI();
-			// }
-		}
-	}
-
-	private class deleteAction extends AbstractAction {
-		public deleteAction() {
-			putValue(NAME, "Delete");
-			putValue(SHORT_DESCRIPTION, "Deletes the entry from DB.");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			// if (e.getActionCommand().equals("Delete")) {
-			// delete entry from DB. delete task from tasks where title =
-			// task.getTitle();
-			MainGUI mg = new MainGUI();
-			mg.createAndShowGUI();
-			// }
+			// refresh here?
 		}
 	}
 
@@ -248,24 +199,6 @@ public class MainGUI extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 
-	}
-
-	// ----- GETTER / SETTER - METHODS ----- //
-
-	public List<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	}
-
-	public List<Phase> getPhases() {
-		return phases;
-	}
-
-	public void setPhases(List<Phase> phases) {
-		this.phases = phases;
 	}
 
 }
